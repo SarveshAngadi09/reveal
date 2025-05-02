@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login to View Image</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+    #image-container { display: none; margin-top: 20px; }
+    #login-form input { margin: 5px; padding: 8px; }
+  </style>
+</head>
+<body>
+
+  <h2>Login</h2>
+  <form id="login-form">
+    <input type="text" id="username" placeholder="Username" required><br>
+    <input type="password" id="password" placeholder="Password" required><br>
+    <button type="submit">Login</button>
+  </form>
+
+  <div id="image-container">
+    <h3>Welcome!</h3>
+    <img src="your-image.jpg" alt="Secret Image" width="400">
+  </div>
+
+  <script>
+    const form = document.getElementById('login-form');
+    const imageContainer = document.getElementById('image-container');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Customize these values
+      const validUsername = 'admin';
+      const validPassword = '1234';
+
+      if (username === validUsername && password === validPassword) {
+        form.style.display = 'none';
+        imageContainer.style.display = 'block';
+      } else {
+        alert('Invalid username or password.');
+      }
+    });
+  </script>
+
+</body>
+</html>
