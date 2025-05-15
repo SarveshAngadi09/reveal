@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Login to View Image</title>
+  <!-- Font for celebration text -->
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <style>
     body {
@@ -71,6 +72,22 @@
         opacity: 0;
       }
     }
+
+    /* Engagement ring image - responsive and magical */
+    .ring-image {
+      width: 80%;
+      max-width: 600px;
+      height: auto;
+      margin-top: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .ring-image:hover {
+      transform: scale(1.05) rotate(-1deg);
+      box-shadow: 0 0 35px 10px rgba(255, 182, 193, 0.6), 0 0 20px rgba(255, 255, 255, 0.5);
+    }
   </style>
 </head>
 <body>
@@ -85,7 +102,7 @@
 
   <div id="image-container">
     <h3 class="celebration-text">When the Universe Talks to you. You Listen to it!</h3>
-    <img src="Engagement.jpg" alt="Secret Image" width="400">
+    <img src="Engagement.jpg" alt="Secret Image" class="ring-image">
   </div>
 
   <script>
@@ -101,7 +118,6 @@
         confetti.style.animationDuration = 2 + Math.random() * 3 + 's';
         document.body.appendChild(confetti);
 
-        // Remove confetti after falling
         setTimeout(() => {
           confetti.remove();
         }, 5000);
@@ -120,7 +136,7 @@
       if (username === validUsername && password === validPassword) {
         form.style.display = 'none';
         imageContainer.style.display = 'block';
-        launchConfetti(); // Trigger confetti
+        launchConfetti();
       } else {
         alert('Invalid Wordle or Treasurehunt Clue.');
       }
