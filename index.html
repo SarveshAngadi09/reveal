@@ -10,7 +10,7 @@
       text-align: center;
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #ffe6f0, #ffe9cc);
+      background-color: #ffb6c1; /* Solid Light Pink Background */
       overflow-x: hidden;
       position: relative;
     }
@@ -158,10 +158,10 @@
     <h3 class="celebration-text">When the Universe Talks to you. You Listen to it!</h3>
 
     <!-- Left side image (heart icon) -->
-    <img src="heart.jpg" alt="Left Side" class="side-image left-side">
+    <img src="https://cdn-icons-png.flaticon.com/512/929/929739.png" alt="Left Side" class="side-image left-side">
     
     <!-- Right side image (ring icon) -->
-    <img src="rings.jpg" alt="Right Side" class="side-image right-side">
+    <img src="https://cdn-icons-png.flaticon.com/512/2347/2347957.png" alt="Right Side" class="side-image right-side">
     
     <!-- Engagement ring image -->
     <img src="Engagement.jpg" alt="Secret Image" class="ring-image">
@@ -170,57 +170,3 @@
   <script>
     const form = document.getElementById('login-form');
     const imageContainer = document.getElementById('image-container');
-
-    // Function to launch confetti
-    function launchConfetti() {
-      for (let i = 0; i < 150; i++) {
-        const confetti = document.createElement('div');
-        confetti.classList.add('confetti');
-        confetti.style.left = Math.random() * 100 + 'vw';
-        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
-        confetti.style.animationDuration = 2 + Math.random() * 3 + 's';
-        document.body.appendChild(confetti);
-
-        setTimeout(() => {
-          confetti.remove();
-        }, 5000);
-      }
-    }
-
-    // Function to launch bubbles
-    function launchBubbles() {
-      for (let i = 0; i < 30; i++) {
-        const bubble = document.createElement('div');
-        bubble.classList.add('bubble');
-        bubble.style.left = Math.random() * 100 + 'vw';
-        bubble.style.animationDuration = 5 + Math.random() * 3 + 's';
-        document.body.appendChild(bubble);
-
-        setTimeout(() => {
-          bubble.remove();
-        }, 8000);
-      }
-    }
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const username = document.getElementById('Wordle').value;
-      const password = document.getElementById('Treasure').value;
-
-      const validUsername = 'a';
-      const validPassword = 'a';
-
-      if (username === validUsername && password === validPassword) {
-        form.style.display = 'none';
-        imageContainer.style.display = 'block';
-        launchConfetti(); // Trigger confetti
-        launchBubbles();  // Trigger bubbles
-      } else {
-        alert('Invalid Wordle or Treasurehunt Clue.');
-      }
-    });
-  </script>
-
-</body>
-</html>
