@@ -8,34 +8,25 @@
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      margin-top: 50px;
-      background: linear-gradient(135deg, #fceabb, #f8b500, #f78ca0);
-      background-size: 400% 400%;
-      animation: celebrationBackground 15s ease infinite;
-      color: #333;
-    }
-
-    @keyframes celebrationBackground {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ffe6f0, #ffe9cc);
+      overflow: hidden;
     }
 
     #image-container {
       display: none;
-      margin-top: 20px;
+      margin-top: 40px;
+    }
+
+    #login-form {
+      margin-top: 100px;
     }
 
     #login-form input {
-      margin: 5px;
-      padding: 8px;
-    }
-
-    .celebration-text {
-      font-family: 'Pacifico', cursive;
-      color: #e91e63;
-      font-size: 28px;
-      margin-bottom: 20px;
+      margin: 10px;
+      padding: 10px;
+      font-size: 16px;
     }
 
     button {
@@ -52,6 +43,34 @@
       background-color: #e91e63;
     }
 
+    .celebration-text {
+      font-family: 'Pacifico', cursive;
+      color: #d81b60;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    /* Confetti Styles */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background-color: red;
+      top: -10px;
+      animation: fall 3s linear infinite;
+      z-index: 9999;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -73,6 +92,22 @@
     const form = document.getElementById('login-form');
     const imageContainer = document.getElementById('image-container');
 
+    function launchConfetti() {
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+        confetti.style.animationDuration = 2 + Math.random() * 3 + 's';
+        document.body.appendChild(confetti);
+
+        // Remove confetti after falling
+        setTimeout(() => {
+          confetti.remove();
+        }, 5000);
+      }
+    }
+
     form.addEventListener('submit', function(e) {
       e.preventDefault();
 
@@ -85,6 +120,7 @@
       if (username === validUsername && password === validPassword) {
         form.style.display = 'none';
         imageContainer.style.display = 'block';
+        launchConfetti(); // Trigger confetti
       } else {
         alert('Invalid Wordle or Treasurehunt Clue.');
       }
