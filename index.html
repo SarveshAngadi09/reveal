@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login to View Image</title>
-  <!-- Font for celebration text -->
+  <title>Engagement Surprise</title>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <style>
     body {
@@ -12,12 +11,14 @@
       margin: 0;
       padding: 0;
       background: linear-gradient(135deg, #ffe6f0, #ffe9cc);
-      overflow: hidden;
+      overflow-x: hidden;
+      position: relative;
     }
 
     #image-container {
       display: none;
       margin-top: 40px;
+      position: relative;
     }
 
     #login-form {
@@ -73,20 +74,73 @@
       }
     }
 
-    /* Engagement ring image - responsive and magical */
+    /* Engagement ring image - responsive */
     .ring-image {
-      width: 80%;
-      max-width: 600px;
+      width: 70%;
+      max-width: 500px;
       height: auto;
       margin-top: 20px;
       border-radius: 12px;
       box-shadow: 0 0 20px rgba(255, 105, 180, 0.4);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .ring-image:hover {
-      transform: scale(1.05) rotate(-1deg);
-      box-shadow: 0 0 35px 10px rgba(255, 182, 193, 0.6), 0 0 20px rgba(255, 255, 255, 0.5);
+    /* Side images (hearts, rings, etc.) */
+    .side-image {
+      position: absolute;
+      top: 40%;
+      width: 10%;
+      z-index: 10;
+      animation: floatSideImages 6s ease-in-out infinite;
+    }
+
+    .left-side {
+      left: 5%;
+    }
+
+    .right-side {
+      right: 5%;
+    }
+
+    @keyframes floatSideImages {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    /* Bubbles effect */
+    .bubble {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-color: rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      animation: bubbleAnimation 6s ease-in-out infinite;
+    }
+
+    @keyframes bubbleAnimation {
+      0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(-100vh) scale(1.5);
+        opacity: 1;
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .ring-image {
+        width: 90%;
+        max-width: 400px;
+      }
+
+      .side-image {
+        width: 20%;
+      }
     }
   </style>
 </head>
@@ -102,6 +156,14 @@
 
   <div id="image-container">
     <h3 class="celebration-text">When the Universe Talks to you. You Listen to it!</h3>
+
+    <!-- Left side image (small heart or icon) -->
+    <img src="https://via.placeholder.com/100x100.png?text=❤️" alt="Left Side" class="side-image left-side">
+    
+    <!-- Right side image (small ring or icon) -->
+    <img src="https://via.placeholder.com/100x100.png?text=💍" alt="Right Side" class="side-image right-side">
+    
+    <!-- Engagement ring image -->
     <img src="Engagement.jpg" alt="Secret Image" class="ring-image">
   </div>
 
@@ -109,8 +171,9 @@
     const form = document.getElementById('login-form');
     const imageContainer = document.getElementById('image-container');
 
+    // Function to launch confetti
     function launchConfetti() {
-      for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < 150; i++) {
         const confetti = document.createElement('div');
         confetti.classList.add('confetti');
         confetti.style.left = Math.random() * 100 + 'vw';
@@ -121,6 +184,21 @@
         setTimeout(() => {
           confetti.remove();
         }, 5000);
+      }
+    }
+
+    // Function to launch bubbles
+    function launchBubbles() {
+      for (let i = 0; i < 30; i++) {
+        const bubble = document.createElement('div');
+        bubble.classList.add('bubble');
+        bubble.style.left = Math.random() * 100 + 'vw';
+        bubble.style.animationDuration = 5 + Math.random() * 3 + 's';
+        document.body.appendChild(bubble);
+
+        setTimeout(() => {
+          bubble.remove();
+        }, 8000);
       }
     }
 
@@ -136,7 +214,8 @@
       if (username === validUsername && password === validPassword) {
         form.style.display = 'none';
         imageContainer.style.display = 'block';
-        launchConfetti();
+        launchConfetti(); // Trigger confetti
+        launchBubbles();  // Trigger bubbles
       } else {
         alert('Invalid Wordle or Treasurehunt Clue.');
       }
